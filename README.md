@@ -23,7 +23,8 @@ Content-Length: 19
 
 { "apple": "tree" }
 ```
-Note: Some classes might throw ```LogicException``` exception if a mandatory HTTP response header is missing. For example:
+Note: Some classes might throw ```LogicException``` exception if a mandatory HTTP response header is missing. 
+For example:
 ```php
 try {
   $res = new RHo\Http\Response\Unauthorized();
@@ -31,3 +32,4 @@ try {
   // "Mandatory 'WWW-Authenticate' header missing."
 }
 ```
+ ```LogicException``` exception is raised also, if the reason phrase not implmented.

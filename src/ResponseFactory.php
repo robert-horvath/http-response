@@ -28,13 +28,21 @@ class ResponseFactory implements ResponseFactoryInterface
 
     public function build(): ResponseInterface
     {
-        $fullyQualifiedClassName = Response::class . '\\' . $this->className;
-        return new $fullyQualifiedClassName($this->headers, $this->msgBody);
+        $class = $this->fullyQualifiedClassName();
+        return new $class($this->headers, $this->msgBody);
     }
 
     public function withReasonPhrase(string $reasonPhrase): ResponseFactoryInterface
     {
         $this->className = str_replace(' ', '', $reasonPhrase);
         return $this;
+    }
+
+    private function fullyQualifiedClassName(): string
+    {
+        $fullyQualifiedClassName = Response::class . '\\' . $this->className;
+        if (class_exists($fullyQualifiedClassName))
+            return $fullyQualifiedClassName;
+        throw new \LogicException("Class $fullyQualifiedClassName does not exist.");
     }
 }

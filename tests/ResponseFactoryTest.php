@@ -104,4 +104,14 @@ final class ResponseFactoryTest extends TestCase
             ->build()
             ->send();
     }
+
+    public function testUnknownReasonPhrase(): void
+    {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage("Class RHo\Http\Response\? does not exist.");
+
+        $this->responseFactory->withReasonPhrase('?')
+            ->build()
+            ->send();
+    }
 }
