@@ -8,8 +8,8 @@ class ResponseFactory implements ResponseFactoryInterface
     /** @var array */
     private $headers = [];
 
-    /** @var string */
-    private $body = NULL;
+    /** @var NULL|string */
+    private $msgBody = NULL;
 
     /** @var string */
     private $className;
@@ -20,16 +20,16 @@ class ResponseFactory implements ResponseFactoryInterface
         return $this;
     }
 
-    public function withBody(string $body): ResponseFactoryInterface
+    function withMsgBody(string $msgBody): ResponseFactoryInterface
     {
-        $this->body = $body;
+        $this->msgBody = $msgBody;
         return $this;
     }
 
     public function build(): ResponseInterface
     {
         $fullyQualifiedClassName = Response::class . '\\' . $this->className;
-        return new $fullyQualifiedClassName($this->headers, $this->body);
+        return new $fullyQualifiedClassName($this->headers, $this->msgBody);
     }
 
     public function withReasonPhrase(string $reasonPhrase): ResponseFactoryInterface

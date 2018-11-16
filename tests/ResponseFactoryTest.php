@@ -23,7 +23,7 @@ final class ResponseFactoryTest extends TestCase
         $this->responseFactory->withHeaders([
             'Content-Type' => 'application/json;charset=UTF-8'
         ])
-            ->withBody('test')
+            ->withMsgBody('test')
             ->withReasonPhrase('Bad Request')
             ->build()
             ->send();

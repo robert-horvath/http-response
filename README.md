@@ -10,7 +10,7 @@ $f = new RHo\Http\ResponseFactory();
 $res = $f->withReasonPhrase('Unauthorized')
          ->withHeaders(['Content-Type' => 'application/vnd.api+json;version=1',
                         'WWW-Authenticate' => 'Basic realm="Access to the staging site", charset="UTF-8'])
-         ->withBody('{ "apple": "tree" }')
+         ->withMsgBody('{ "apple": "tree" }')
          ->build();
 $res->send();
 ```

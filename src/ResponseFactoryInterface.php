@@ -8,7 +8,7 @@ interface ResponseFactoryInterface
 
     function withHeaders(array $headers): ResponseFactoryInterface;
 
-    function withBody(string $body): ResponseFactoryInterface;
+    function withMsgBody(string $msgBody): ResponseFactoryInterface;
 
     function build(): ResponseInterface;
 }
