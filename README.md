@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/robert-horvath/http-response.svg?branch=develop)](https://travis-ci.org/robert-horvath/http-response)
-[![Code Coverage](https://codecov.io/gh/robert-horvath/http-response/branch/develop/graph/badge.svg)](https://codecov.io/gh/robert-horvath/http-response)
+[![Build Status](https://travis-ci.org/robert-horvath/http-response.svg?branch=0.1.x)](https://travis-ci.org/robert-horvath/http-response)
+[![Code Coverage](https://codecov.io/gh/robert-horvath/http-response/branch/0.1.x/graph/badge.svg)](https://codecov.io/gh/robert-horvath/http-response)
 [![Latest Stable Version](https://img.shields.io/packagist/v/robert/http-response.svg)](https://packagist.org/packages/robert/http-response)
 # HTTP Response
 The HTTP response module is a thin wrapper to send an HTTP response message.

@@ -44,4 +44,17 @@ class Response implements ResponseInterface
         if ($this->msgBody !== NULL)
             echo $this->msgBody;
     }
+
+    protected function hasMsgBody(): bool
+    {
+        if ($this->msgBody !== NULL)
+            return TRUE;
+        return FALSE;
+    }
+
+    protected function checkMandatoryHeader(string $header)
+    {
+        if (! array_key_exists($header, $this->headers))
+            throw new \LogicException("Mandatory '$header' header missing.");
+    }
 }
