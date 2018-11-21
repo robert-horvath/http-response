@@ -4,7 +4,7 @@ namespace RHo\Http\Response;
 
 use RHo\Http\Response;
 
-class InternalServerError extends Response
+class NotImplemented extends Response
 {
 
     public function __construct(array $headers = [], ?string $msgBody = NULL)

@@ -1,13 +1,13 @@
-PATH := vendor/bin:$(PATH)
-.PHONY: clean dev-env no-dev-env test
+.PHONY: clean unit-test-env integration-test-env unit-test integration-test
 
-dev-env:
-	@echo "\033[0;33m>>> Prepare workspace for development\033[0m"
+unit-test-env:
+	@echo "\033[0;33m>>> Prepare workspace for unit testing\033[0m"
+	composer install --no-interaction
+	composer unit-test-env
+
+integration-test-env:
+	@echo "\033[0;33m>>> Prepare workspace for integration testing\033[0m"
 	composer install --no-interaction --prefer-source
-
-no-dev-env:
-	@echo "\033[0;33m>>> Prepare workspace for production\033[0m"
-	composer install --no-dev --no-interaction --prefer-source
 
 clean:
 	@echo "\033[0;33m>>> Cleaning workspace\033[0m"
@@ -15,4 +15,8 @@ clean:
 
 unit-test:
 	@echo "\033[0;33m>>> Running unit tests\033[0m"
-	phpunit --testsuite unit-test
+	vendor/bin/phpunit --testsuite unit-test
+
+integration-test:
+	@echo "\033[0;33m>>> Running integration tests\033[0m"
+	vendor/bin/phpunit --testsuite integration-test
