@@ -10,6 +10,6 @@ class Unauthorized extends Response
     public function __construct(array $headers = [], ?string $msgBody = NULL)
     {
         parent::__construct(401, $headers, $msgBody);
-        $this->checkMandatoryHeader('WWW-Authenticate');
+        $this->throwExceptionIfMandatoryHeaderMissing('WWW-Authenticate');
     }
 }

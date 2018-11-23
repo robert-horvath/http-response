@@ -10,6 +10,17 @@ class Created extends Response
     public function __construct(array $headers = [], ?string $msgBody = NULL)
     {
         parent::__construct(201, $headers, $msgBody);
-        $this->checkMandatoryHeader('Location');
+        $this->throwExceptionIfMandatoryHeadersMissing();
+    }
+
+    private function throwExceptionIfMandatoryHeadersMissing(): void
+    {
+        $mandatoryHeaders = [
+            'Location',
+            'ETag',
+            'Last-Modified'
+        ];
+        foreach ($mandatoryHeaders as $header)
+            $this->throwExceptionIfMandatoryHeaderMissing($header);
     }
 }

@@ -52,7 +52,7 @@ class Response implements ResponseInterface
         return FALSE;
     }
 
-    protected function checkMandatoryHeader(string $header)
+    protected function throwExceptionIfMandatoryHeaderMissing(string $header)
     {
         if (! array_key_exists($header, $this->headers))
             throw new \LogicException("Mandatory '$header' header missing.");

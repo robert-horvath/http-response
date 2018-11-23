@@ -3,7 +3,7 @@ namespace RHo\HttpTest;
 
 use PHPUnit\Framework\TestCase;
 
-final class ResponseTest extends TestCase
+final class ClientErrorResponseTest extends TestCase
 {
 
     public function testBadRequest(): void
@@ -13,7 +13,7 @@ final class ResponseTest extends TestCase
         ];
         $body = 'test';
         (new \RHo\Http\Response\BadRequest($headers, $body))->send();
-        
+
         $this->assertSame(400, http_response_code());
         $headers = xdebug_get_headers();
         $this->assertArraySubset([
@@ -22,35 +22,35 @@ final class ResponseTest extends TestCase
         $this->expectOutputString('test');
     }
 
+    public function testForbidden(): void
+    {
+        (new \RHo\Http\Response\Forbidden())->send();
+
+        $this->assertSame(403, http_response_code());
+        $this->expectOutputString('');
+    }
+
+    public function testMethodNotAllowed(): void
+    {
+        (new \RHo\Http\Response\MethodNotAllowed())->send();
+
+        $this->assertSame(405, http_response_code());
+        $this->expectOutputString('');
+    }
+
     public function testNotAcceptable(): void
     {
         (new \RHo\Http\Response\NotAcceptable())->send();
-        
+
         $this->assertSame(406, http_response_code());
         $this->expectOutputString('');
     }
 
-    public function testMultipleChoices(): void
+    public function testNotFound(): void
     {
-        (new \RHo\Http\Response\MultipleChoices())->send();
-        
-        $this->assertSame(300, http_response_code());
-        $this->expectOutputString('');
-    }
+        (new \RHo\Http\Response\NotFound())->send();
 
-    public function testUnsupportedMediaType(): void
-    {
-        (new \RHo\Http\Response\UnsupportedMediaType())->send();
-        
-        $this->assertSame(415, http_response_code());
-        $this->expectOutputString('');
-    }
-
-    public function testInternalServerError(): void
-    {
-        (new \RHo\Http\Response\InternalServerError())->send();
-        
-        $this->assertSame(500, http_response_code());
+        $this->assertSame(404, http_response_code());
         $this->expectOutputString('');
     }
 
@@ -61,7 +61,7 @@ final class ResponseTest extends TestCase
             'WWW-Authenticate' => 'Basic realm="Access to the staging site", charset="UTF-8'
         ];
         (new \RHo\Http\Response\Unauthorized($headers))->send();
-        
+
         $this->assertSame(401, http_response_code());
         $headers = xdebug_get_headers();
         $this->assertArraySubset([
@@ -75,6 +75,14 @@ final class ResponseTest extends TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage("Mandatory 'WWW-Authenticate' header missing.");
-        (new \RHo\Http\Response\Unauthorized())->send();
+        new \RHo\Http\Response\Unauthorized();
+    }
+
+    public function testUnsupportedMediaType(): void
+    {
+        (new \RHo\Http\Response\UnsupportedMediaType())->send();
+
+        $this->assertSame(415, http_response_code());
+        $this->expectOutputString('');
     }
 }
