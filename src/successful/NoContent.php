@@ -4,7 +4,7 @@ namespace RHo\Http\Response;
 
 use RHo\Http\Response;
 
-class Accepted extends Response
+class NoContent extends Response
 {
 
     public function __construct(array $headers = [], ?string $msgBody = NULL)

@@ -1,13 +1,8 @@
 <?php
-declare(strict_types = 1);
 namespace RHo\HttpTest;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- *
- * @runTestsInSeparateProcesses
- */
 final class ResponseFactoryTest extends TestCase
 {
 
@@ -27,7 +22,7 @@ final class ResponseFactoryTest extends TestCase
             ->withReasonPhrase('Bad Request')
             ->build()
             ->send();
-
+        
         $this->assertSame(400, http_response_code());
         $headers = xdebug_get_headers();
         $this->assertArraySubset([
@@ -41,7 +36,7 @@ final class ResponseFactoryTest extends TestCase
         $this->responseFactory->withReasonPhrase('Not Acceptable')
             ->build()
             ->send();
-
+        
         $this->assertSame(406, http_response_code());
         $this->expectOutputString('');
     }
@@ -51,7 +46,7 @@ final class ResponseFactoryTest extends TestCase
         $this->responseFactory->withReasonPhrase('Unsupported Media Type')
             ->build()
             ->send();
-
+        
         $this->assertSame(415, http_response_code());
         $this->expectOutputString('');
     }
@@ -61,7 +56,7 @@ final class ResponseFactoryTest extends TestCase
         $this->responseFactory->withReasonPhrase('Multiple Choices')
             ->build()
             ->send();
-
+        
         $this->assertSame(300, http_response_code());
         $this->expectOutputString('');
     }
@@ -71,7 +66,7 @@ final class ResponseFactoryTest extends TestCase
         $this->responseFactory->withReasonPhrase('Internal Server Error')
             ->build()
             ->send();
-
+        
         $this->assertSame(500, http_response_code());
         $this->expectOutputString('');
     }
@@ -85,7 +80,7 @@ final class ResponseFactoryTest extends TestCase
             ->withReasonPhrase('Unauthorized')
             ->build()
             ->send();
-
+        
         $this->assertSame(401, http_response_code());
         $headers = xdebug_get_headers();
         $this->assertArraySubset([
@@ -99,7 +94,7 @@ final class ResponseFactoryTest extends TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage("Mandatory 'WWW-Authenticate' header missing.");
-
+        
         $this->responseFactory->withReasonPhrase('Unauthorized')
             ->build()
             ->send();
@@ -109,7 +104,7 @@ final class ResponseFactoryTest extends TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage("Class RHo\Http\Response\? does not exist.");
-
+        
         $this->responseFactory->withReasonPhrase('?')
             ->build()
             ->send();

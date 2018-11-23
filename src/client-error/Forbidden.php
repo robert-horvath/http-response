@@ -4,7 +4,7 @@ namespace RHo\Http\Response;
 
 use RHo\Http\Response;
 
-class NotAcceptable extends Response
+class Forbidden extends Response
 {
 
     public function __construct(array $headers = [], ?string $msgBody = NULL)
