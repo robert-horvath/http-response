@@ -1,0 +1,13 @@
+{
+    "name": "robert/http-response",
+    "description": "The HTTP response module provides the interfaces to create an HTTP message and send it back to client.",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "RHo\\Http\\Response\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.1"
+    }
+}
